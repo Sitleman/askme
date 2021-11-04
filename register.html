@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>AskMe</title>
+    <link href="static/css/my.css" rel="stylesheet">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+
+  </head>
+
+
+  <body class="d-flex flex-column h-100">
+
+    <header>
+      <nav class="navbar navbar-expand-md fixed-top">
+        <div class="container line"></div>
+      </nav>
+      <nav class="navbar navbar-expand-md fixed-top">
+        <div class="container-fluid row">
+            <div class="col-3 header_left">
+             <a class="navbar-brand" href="#">
+               AskMe
+               <img class="logo_photo" src="static/img/logo.jpg" alt="">
+             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+
+          <div class="col-6 header_center collapse navbar-collapse" id="navbarCollapse">
+            <form class="d-flex">
+              <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-success" type="submit">ASK!</button>
+            </form>
+          </div>
+
+          <div class="col-3 header_right">
+            <div class="row">
+              <div class="col-4">
+                <img class="profile_photo" src="static/img/photo.png" alt="">
+              </div>
+              <div class="col-8">
+                  <h6 class="light">John Smith</h6>
+                  <button type="button" class="btn btn-sm btn-outline-primary">Settings</button>
+                  <button type="button" class="btn btn-sm btn-outline-primary">Log out</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </nav>
+
+    </header>
+
+    <!-- Begin page content -->
+
+    <main class="flex-shrink-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-7 left_block">
+              <h2>Log up</h2>
+
+              <div class="error-auth">
+                  Sorry, this email-address already registered!
+              </div>
+
+              <form class="register needs-validation" novalidate>
+                  <div class="row">
+                      <div class="col">
+                              <div class="form-group">
+                              <label for="input-login">Login</label>
+                              <input id="input-login" class="form-control" type="text" required/>
+                              <div class="invalid-feedback">
+                                Please, enter login!
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="input-email">Email</label>
+                              <input id="input-email" class="form-control" type="email" required/>
+                              <div class="invalid-feedback">
+                                Please, enter email!
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="input-nik">Nikname</label>
+                              <input id="input-nik" class="form-control" type="text" required/>
+                              <div class="invalid-feedback">
+                                Please, enter nikname!
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col">
+                          <div class="form-group">
+                              <label for="input-password">Password</label>
+                              <input id="input-password" class="form-control" type="password" required>
+                              <div class="invalid-feedback">
+                                Please, enter password!
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="input-rep-password">Repeat password</label>
+                              <input id="input-rep-password" class="form-control" type="password" required>
+                              <div class="invalid-feedback">
+                                Please, repeat password!
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="input-file" class="form-label">Avatar</label>
+                              <input class="form-control" type="file" id="input-file">
+                          </div>
+                      </div>
+                  </div>
+
+                  <input type="submit" class="btn btn-primary" value="Register"/>
+              </form>
+
+
+          </div>
+
+          <div class="col-3 right_block">
+            <div class="tags">
+              <h2>Tags</h2>
+              <a href="#"><span class="tag" style="font-size: 22px; color: red">Computers</span></a>
+              <a href="#"><span class="tag" style="font-size: 30px; color: green">AI</span></a>
+              <a href="#"><span class="tag" style="font-size: 20px; color: yellow">Python</span></a>
+              <a href="#"><span class="tag" style="font-size: 26px; color: blue">Education</span></a>
+              <a href="#"><span class="tag" style="font-size: 22px; color: brown">Hardware</span></a>
+              <a href="#"><span class="tag" style="font-size: 36px; color: coral">VK</span></a>
+            </div>
+            <div class="best-members">
+              <h2>Best members</h2>
+              <a href="#">John Smith</a>
+              <a href="#">Kein Walker</a>
+              <a href="#">Dusty Roads</a>
+              <a href="#">Anna Kluan</a>
+            </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer mt-auto py-3 bg-light">
+      <div class="container">
+        <span class="text-muted">AskMe: Find the answer to any question.</span>
+      </div>
+    </footer>
+
+
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/my.js"></script>
+  </body>
+</html>
