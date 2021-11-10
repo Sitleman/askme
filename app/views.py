@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-# Create your views here.
+from app.models import Question
 
 questions = [{
         "title": f"Title {i}",
@@ -17,14 +17,14 @@ def paginate(objects_list, request, per_page=2):
     return data
 
 def index(request):
+    questions = Question.m.new()
     data = paginate(questions, request)
     return render(request, "index.html", {'questions': data, 'block_name': 'Questions'})
 
 def hot(request):
+    questions = Question.m.hot()
     data = paginate(questions, request)
     return render(request, "index.html", {'questions': data, 'block_name': 'Hot questions'})
-
-
 
 def q_with_tag(question_tag):
     question = [{
@@ -36,9 +36,9 @@ def q_with_tag(question_tag):
     return question
 
 def tag(request, question_tag):
-    data = paginate(q_with_tag(question_tag), request)
+    questions = Question.m.by_tag(question_tag)
+    data = paginate(questions, request)
     return render(request, "index.html", {'questions': data, 'block_name': f'Tag \'{question_tag}\''})
-
 
 
 def q(i):
