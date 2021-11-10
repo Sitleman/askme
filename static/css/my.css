@@ -6,6 +6,11 @@ main > .container {
   width: 100%;
 }
 
+.navbar_profile_photo{
+  width: 100%;
+  max-width: 57px;
+}
+
 .question{
   margin: 30px;
   padding: 10px;

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <h2>Sign up</h2>
+  <div class="error-auth">
+      Sorry, this email-address already registered!
+  </div>
+
+  <form class="register needs-validation" novalidate>
+      <div class="row">
+          <div class="col">
+                  <div class="form-group">
+                  <label for="input-login">Login</label>
+                  <input id="input-login" class="form-control" type="text" required/>
+                  <div class="invalid-feedback">
+                    Please, enter login!
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="input-email">Email</label>
+                  <input id="input-email" class="form-control" type="email" required/>
+                  <div class="invalid-feedback">
+                    Please, enter email!
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="input-nik">Nikname</label>
+                  <input id="input-nik" class="form-control" type="text" required/>
+                  <div class="invalid-feedback">
+                    Please, enter nikname!
+                  </div>
+              </div>
+          </div>
+
+          <div class="col">
+              <div class="form-group">
+                  <label for="input-password">Password</label>
+                  <input id="input-password" class="form-control" type="password" required>
+                  <div class="invalid-feedback">
+                    Please, enter password!
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="input-rep-password">Repeat password</label>
+                  <input id="input-rep-password" class="form-control" type="password" required>
+                  <div class="invalid-feedback">
+                    Please, repeat password!
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="input-file" class="form-label">Avatar</label>
+                  <input class="form-control" type="file" id="input-file">
+              </div>
+          </div>
+      </div>
+
+      <input type="submit" class="btn btn-primary" value="Register"/>
+  </form>
+{% endblock content %}

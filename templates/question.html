@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+          <div class="col-3">
+              <img class="profile_photo" src="../static/img/photo.png" alt="">
+              <div class="likes">Likes: 10
+                <button class="btn btn-sm set-like">
+                  <i class="bi bi-star"></i>
+                  <img src="../static/img/star.svg">
+                </button>
+              </div>
+          </div>
+          <div class="col-9">
+              <h3>{{question.title}}</h3>
+              <p class="question_text">{{question.text}}</p>
+              <div>
+                    Tags:
+                  <a class="tags">Important</a>,
+                  <a class="tags">Computer</a>
+              </div>
+          </div>
+      </div>
+
+      <div class="container line"></div>
+
+    <h2>Answers</h2>
+    {% for item in answers %}
+        {% include "single_answer.html" %}
+    {% endfor %}
+
+    <nav>
+        <ul class="pagination">
+
+          {% if answers.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ answers.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% endif %}
+
+          <li class="page-item"><a class="page-link" href="#">
+            Page {{answers.number}} of {{answers.paginator.num_pages}}
+          </a></li>
+
+          {% if answers.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ answers.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </nav>
+
+    <div class="container line"></div>
+    <div class="your-answer">
+        <textarea class="form-control" placeholder="Enter your answer..."></textarea>
+        <input type="button" class="btn btn-outline-primary" value="Send"/>
+    </div>
+{% endblock content %}
+
+
