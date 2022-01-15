@@ -1,7 +1,14 @@
+from django.contrib import auth
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.shortcuts import redirect
+from django.shortcuts import reverse
 from django.http import HttpResponse
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from app.models import Question
+from app.forms import LoginForm, SignupForm, AskForm
 
 questions = [{
         "title": f"Title {i}",
@@ -59,14 +66,54 @@ def question(request, question_id):
     data = paginate(ans_for_q(question_id), request)
     return render(request, "question.html", {'question': q(question_id), 'answers': data})
 
-def login(request):
-    return render(request, "login.html", {})
 
-def register(request):
-    return render(request, "register.html", {})
-
+@login_required(login_url='login')
 def ask(request):
-    return render(request, "ask.html", {})
+    if request.method == 'GET':
+        q_form = AskForm()
+    if request.method == 'POST':
+        q_form = AskForm(data=request.POST)
+        if q_form.is_valid():
+            q = Question(title=q_form.cleaned_data['title'], text=q_form.cleaned_data['text'], author=request.user)
+            # q = Question({'title': q_form.cleaned_data['title'], 'text': q_form.cleaned_data['text']})
+            q.save()
+
+            return redirect(reverse('question', args='5'))
+    return render(request, "ask.html", {"form" : q_form})
+
+
 
 def settings(request):
     return render(request, "settings.html", {})
+
+
+def register(request):
+    if request.method == 'GET':
+        form = SignupForm()
+    elif request.method == 'POST':
+        form = SignupForm(data=request.POST)
+        if form.is_valid():
+            my_user = User.objects.create_user(form.cleaned_data['login'], form.cleaned_data['email'], form.cleaned_data['password'])
+            # profile = Profile.objects.create(avatar=form.cleaned_data['avatar'], user=my_user)
+            auth.login(request, my_user)
+            return redirect(reverse('index'))
+    return render(request, "register.html", {"form": form})
+
+def login(request):
+    print(request.POST)
+    if request.method == 'GET':
+        form = LoginForm()
+    elif request.method == 'POST':
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            user = auth.authenticate(**form.cleaned_data)
+            if not user:
+                form.add_error(None, 'User not found.')
+            else:
+                auth.login(request, user)
+                return redirect(reverse('hot'))
+    return render(request, "login.html", {"form": form})
+
+def logout_view(request):
+    auth.logout(request)
+    return redirect(reverse('index'))

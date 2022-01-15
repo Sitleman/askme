@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 class QuestionManager(models.Manager):
@@ -8,26 +9,26 @@ class QuestionManager(models.Manager):
     def by_tag(self, tag):
         return self.filter(tags__name=tag)
 
+# class Profile(models.Model):
+#     avatar = models.FileField()
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
 class Question(models.Model):
     title = models.CharField(max_length=50)
     text = models.TextField()
-    pub_date = models.DateTimeField('date published')
-    author = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     count_answers = models.IntegerField(default=0)
     m = QuestionManager()
 
 class Answer(models.Model):
     text = models.TextField()
     pub_date = models.DateTimeField('date published')
-    author = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='answers')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
     questions = models.ManyToManyField('Question', related_name='tags')
-
-class Profile(models.Model):
-    #avatar = models.ImageField()
-    avatar = models.CharField(max_length=50)
 
 class Like(models.Model):
     status = models.BooleanField()

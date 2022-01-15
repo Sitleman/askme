@@ -1,13 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
 
 {% block content %}
  <h2>New question</h2>
- <form class="ask needs-validation" novalidate>
+ <form class="ask needs-validation" novalidate method="post" action="{% url 'ask' %}">
+     {% csrf_token %}
+     {% bootstrap_form form %}
+     {% buttons %}
+     <input type="submit" class="btn btn-success" value="ASK"/>
+     {% endbuttons %}
+ </form>
+{% endblock content %}
+
+<!--
+
+{{ form.non_field_errors }}
       <div class="form-group">
-          <label for="input-title">Title (max. 50)</label>
-          <input id="input-title" class="form-control" type="text" required maxlength="50" placeholder="How to compile program?"/>
+          {{ form.title.errors }}
+          <label for="{{ form.title.id_for_label }}">Title (max. 50)</label>
+          {{ form.title }}
+         <input id="input-title" class="form-control" type="text" required maxlength="50" placeholder="How to compile program?"/>
           <div class="invalid-feedback">
             Please, enter question title!
           </div>
@@ -17,7 +31,7 @@
           <label for="input-text">Text (max. 300)</label>
           <textarea id="input-text" class="form-control" required maxlength="300" placeholder="I have a problem with compile program on Python..."></textarea>
           <div class="invalid-feedback">
-            Please, enter text of question!"
+            Please, enter text of question!
           </div>
       </div>
 
@@ -29,6 +43,4 @@
           </div>
       </div>
 
-      <input type="submit" class="btn btn-success" value="ASK"/>
-  </form>
-{% endblock content %}
+-->

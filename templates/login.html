@@ -1,14 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load bootstrap4 %}
 {% block content %}
 
 <h2>Log in</h2>
 <div class="error-auth">
   Sorry, login or password incorrect!
 </div>
-<form class="login needs-validation" novalidate>
-  <div class="form-group">
+<form class="login needs-validation" novalidate action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    {% buttons %}
+  <input type="submit" class="btn btn-primary" value="Login"/>
+    {% endbuttons %}
+</form>
+
+<div style="margin-top: 30px;">or <a href="{% url 'register' %}">create new account</a></div>
+
+{% endblock content %}
+
+
+
+<!--<div class="form-group">
       <label for="input-login">Login</label>
       <input id="input-login" class="form-control" type="text" required/>
       <div class="invalid-feedback">
@@ -23,10 +37,4 @@
         Please, enter password!
       </div>
   </div>
-
-  <input type="submit" class="btn btn-primary" value="Login"/>
-</form>
-
-<div style="margin-top: 30px;">or <a href="{% url 'register' %}">create new account</a></div>
-
-{% endblock content %}
+  -->

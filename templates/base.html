@@ -37,18 +37,28 @@
             </form>
           </div>
 
+          {% if request.user.is_authenticated %}
           <div class="col-3 header_right">
             <div class="row">
               <div class="col-4">
                 <img class="navbar_profile_photo" src="../static/img/photo.png" alt="">
               </div>
               <div class="col-8">
-                  <h6 class="light">John Smith</h6>
+                  <h6 class="light">{{ request.user.username }}</h6>
                   <a href="{% url 'settings' %}" type="button" class="btn btn-sm btn-outline-primary">Settings</a>
-                  <button type="button" class="btn btn-sm btn-outline-primary">Log out</button>
+                  <a href="{% url 'logout' %}" type="button" class="btn btn-sm btn-outline-primary">Log out</a>
               </div>
             </div>
           </div>
+          {% else %}
+          <div class="col-3 header_right">
+            <div class="buttons">
+              <a href="{% url 'login' %}" type="button" class="btn btn-outline-primary">Log in</a>
+              <a href="{% url 'register' %}" type="button" class="btn btn-outline-primary">Sign up</a>
+            </div>
+          </div>
+          {% endif %}
+
 
         </div>
 
