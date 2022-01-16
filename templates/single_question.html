@@ -15,12 +15,13 @@
     </p>
     <div class="row">
       <div class="col-3">
-        <a href="{% url 'question' question.count_answers %}" class="answer_link">Answers({{question.count_answers}})</a>
+        <a href="{% url 'question' question.id %}" class="answer_link">Answers({{question.answers.count}})</a>
       </div>
       <div class="col-9">
         Tags:
-      <a href="{% url 'tag' 'Important' %}" class="tags">Important</a>,
-      <a href="{% url 'tag' 'Computer' %}" class="tags">Computer</a>
+      {% for tag in question.tags.all %}
+        <a href="{% url 'tag' tag.name %}" class="tags">{{ tag.name }}</a>
+      {% endfor %}
       </div>
     </div>
   </div>

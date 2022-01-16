@@ -8,6 +8,8 @@ class QuestionManager(models.Manager):
         return self.order_by('likes')
     def by_tag(self, tag):
         return self.filter(tags__name=tag)
+    def by_id(self, req_id):
+        return self.get(id=req_id)
 
 # class Profile(models.Model):
 #     avatar = models.FileField()
@@ -23,7 +25,8 @@ class Question(models.Model):
 
 class Answer(models.Model):
     text = models.TextField()
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateTimeField(auto_now_add=True)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers', null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answers')
 
 class Tag(models.Model):

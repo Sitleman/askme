@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block content %}
 <h2>Settings: John Smith</h2>
-<form class="settings needs-validation" novalidate>
-      <div class="form-group">
+<form class="settings needs-validation" novalidate method="post" action="{% url 'settings' %}">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    {% buttons %}
+    <input type="submit" class="btn btn-primary" value="Save"/>
+    {% endbuttons %}
+</form>
+{% endblock content %}
+
+<!--
+
+<div class="form-group">
           <label for="input-login">Login</label>
           <input id="input-login" class="form-control" type="text" value="john_smith"/>
       </div>
@@ -23,8 +35,4 @@
           <label for="input-file" class="form-label">Upload avatar</label>
           <input class="form-control" type="file" id="input-file">
       </div>
-
-  <input type="submit" class="btn btn-primary" value="Save"/>
-</form>
-{% endblock content %}
-
+      -->

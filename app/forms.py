@@ -19,8 +19,25 @@ class AskForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
     tags = forms.CharField()
 
+class AnswerForm(forms.Form):
+    text = forms.CharField(widget=forms.Textarea)
 
 class SignupForm(forms.Form):
+    login = forms.CharField()
+    email = forms.CharField()
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+    password_repeat = forms.CharField(widget=forms.PasswordInput)
+    avatar = forms.FileField(required=False)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        if super().is_valid():
+            if cleaned_data['password'] != cleaned_data['password_repeat']:
+                self.add_error('password_repeat', "Passwords aren't equal")
+        return cleaned_data
+
+class SettingsForm(forms.Form):
     login = forms.CharField()
     email = forms.CharField()
     username = forms.CharField()

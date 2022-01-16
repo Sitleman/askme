@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block content %}
     <div class="row">
@@ -17,8 +18,9 @@
               <p class="question_text">{{question.text}}</p>
               <div>
                     Tags:
-                  <a class="tags">Important</a>,
-                  <a class="tags">Computer</a>
+                  {% for tag in question.tags.all %}
+                    <a href="{% url 'tag' tag.name %}" class="tags">{{ tag.name }}</a>
+                  {% endfor %}
               </div>
           </div>
       </div>
@@ -57,10 +59,15 @@
       </nav>
 
     <div class="container line"></div>
-    <div class="your-answer">
-        <textarea class="form-control" placeholder="Enter your answer..."></textarea>
-        <input type="button" class="btn btn-outline-primary" value="Send"/>
-    </div>
+
+    <form class="your-answer" novalidate method="post" action="{% url 'question' question.id %}">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+<!--        <textarea class="form-control" placeholder="Enter your answer..."></textarea>-->
+        {% buttons %}
+        <input type="submit" class="btn btn-outline-primary" value="Send"/>
+        {% endbuttons %}
+    </form>
 {% endblock content %}
 
 
