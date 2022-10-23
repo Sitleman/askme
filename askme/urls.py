@@ -29,5 +29,5 @@ urlpatterns = [
     path('signup/', views.register, name='register'),
     path('ask/', views.ask, name='ask'),
     path('settings/', views.settings, name='settings'),
-
+    # path('', include('django_prometheus.urls')),
 ]
